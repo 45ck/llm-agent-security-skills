@@ -1,0 +1,143 @@
+{
+  "name": "llm-agent-security-pack",
+  "version": "0.1.0",
+  "type": "skill-pack",
+  "summary": "LLM and agent security skill pack for Claude Code-style workflows.",
+  "recommended_order": [
+    "prompt-injection-reviewer",
+    "tool-permission-boundary-checker",
+    "agent-agency-reviewer",
+    "context-leak-reviewer",
+    "secret-exposure-reviewer",
+    "unsafe-tool-chain-detector",
+    "memory-poisoning-risk-reviewer",
+    "llm-output-handling-checker",
+    "retrieval-trustworthiness-reviewer",
+    "guardrail-policy-writer",
+    "agent-sandbox-reviewer"
+  ],
+  "skills": [
+    {
+      "id": "prompt-injection-reviewer",
+      "path": "skills/prompt-injection-reviewer/SKILL.md",
+      "purpose": "Review prompts, context assembly, retrieved content, and tool flows for direct and indirect prompt injection risk.",
+      "handoffs": [
+        "tool-permission-boundary-checker",
+        "guardrail-policy-writer",
+        "retrieval-trustworthiness-reviewer"
+      ]
+    },
+    {
+      "id": "tool-permission-boundary-checker",
+      "path": "skills/tool-permission-boundary-checker/SKILL.md",
+      "purpose": "Check whether agent tools, function calls, and external actions are bounded by explicit permissions, approval gates, and least-privilege rules.",
+      "handoffs": [
+        "agent-agency-reviewer",
+        "guardrail-policy-writer",
+        "agent-sandbox-reviewer"
+      ]
+    },
+    {
+      "id": "agent-agency-reviewer",
+      "path": "skills/agent-agency-reviewer/SKILL.md",
+      "purpose": "Review whether the agent has excessive autonomy relative to the task, risk level, and available safeguards.",
+      "handoffs": [
+        "tool-permission-boundary-checker",
+        "agent-sandbox-reviewer",
+        "guardrail-policy-writer"
+      ]
+    },
+    {
+      "id": "context-leak-reviewer",
+      "path": "skills/context-leak-reviewer/SKILL.md",
+      "purpose": "Review whether hidden prompts, private context, prior conversation state, or system metadata can leak through outputs or retrieved artifacts.",
+      "handoffs": [
+        "secret-exposure-reviewer",
+        "llm-output-handling-checker",
+        "guardrail-policy-writer"
+      ]
+    },
+    {
+      "id": "secret-exposure-reviewer",
+      "path": "skills/secret-exposure-reviewer/SKILL.md",
+      "purpose": "Check whether prompts, tools, logs, traces, memory, or outputs can expose credentials, keys, tokens, or sensitive internal data.",
+      "handoffs": [
+        "context-leak-reviewer",
+        "agent-sandbox-reviewer",
+        "guardrail-policy-writer"
+      ]
+    },
+    {
+      "id": "unsafe-tool-chain-detector",
+      "path": "skills/unsafe-tool-chain-detector/SKILL.md",
+      "purpose": "Identify unsafe multi-step tool chains where low-trust content can trigger privileged or irreversible actions through the agent.",
+      "handoffs": [
+        "tool-permission-boundary-checker",
+        "agent-agency-reviewer",
+        "agent-sandbox-reviewer"
+      ]
+    },
+    {
+      "id": "memory-poisoning-risk-reviewer",
+      "path": "skills/memory-poisoning-risk-reviewer/SKILL.md",
+      "purpose": "Review whether long-term memory, vector stores, notes, or cached context can be poisoned and later influence the agent unsafely.",
+      "handoffs": [
+        "retrieval-trustworthiness-reviewer",
+        "prompt-injection-reviewer",
+        "guardrail-policy-writer"
+      ]
+    },
+    {
+      "id": "llm-output-handling-checker",
+      "path": "skills/llm-output-handling-checker/SKILL.md",
+      "purpose": "Check whether model outputs are validated, constrained, escaped, approved, or otherwise handled safely before downstream use.",
+      "handoffs": [
+        "prompt-injection-reviewer",
+        "tool-permission-boundary-checker",
+        "secret-exposure-reviewer"
+      ]
+    },
+    {
+      "id": "retrieval-trustworthiness-reviewer",
+      "path": "skills/retrieval-trustworthiness-reviewer/SKILL.md",
+      "purpose": "Review whether retrieved documents, search results, memories, and external content are trustworthy enough for the agent to act on.",
+      "handoffs": [
+        "prompt-injection-reviewer",
+        "memory-poisoning-risk-reviewer",
+        "guardrail-policy-writer"
+      ]
+    },
+    {
+      "id": "guardrail-policy-writer",
+      "path": "skills/guardrail-policy-writer/SKILL.md",
+      "purpose": "Write explicit agent guardrail policies covering allowed actions, prohibited behavior, escalation points, approvals, and safe fallbacks.",
+      "handoffs": [
+        "tool-permission-boundary-checker",
+        "agent-agency-reviewer",
+        "agent-sandbox-reviewer"
+      ]
+    },
+    {
+      "id": "agent-sandbox-reviewer",
+      "path": "skills/agent-sandbox-reviewer/SKILL.md",
+      "purpose": "Review whether the runtime environment constrains filesystem, network, process, credential, and external side effects to acceptable boundaries.",
+      "handoffs": [
+        "tool-permission-boundary-checker",
+        "secret-exposure-reviewer",
+        "guardrail-policy-writer"
+      ]
+    }
+  ],
+  "templates": [
+    "templates/prompt-injection-review-template.md",
+    "templates/tool-permission-matrix-template.csv",
+    "templates/agency-risk-register-template.md",
+    "templates/context-leak-checklist.md",
+    "templates/secret-exposure-review-template.md",
+    "templates/tool-chain-risk-template.md",
+    "templates/memory-poisoning-scenarios-template.md",
+    "templates/output-handling-checklist.md",
+    "templates/retrieval-trustworthiness-template.md",
+    "templates/guardrail-policy-template.md"
+  ]
+}
