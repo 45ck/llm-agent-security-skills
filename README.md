@@ -90,8 +90,8 @@ LICENSE                              MIT
 
 ## Related workflow agents
 
-- [security-reviewer](https://github.com/45ck/workflow-agents) - Review prompt injection, tool permissions, and agent safety
-- [security-reviewer-beads](https://github.com/45ck/workflow-agents) - Track LLM and agent hardening work items
+- [security-reviewer](https://github.com/45ck/skill-harness) - Review prompt injection, tool permissions, and agent safety
+- [security-reviewer-beads](https://github.com/45ck/skill-harness) - Track LLM and agent hardening work items
 
 ## Related skill packs
 
